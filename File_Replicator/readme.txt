@@ -40,7 +40,8 @@ OPERATION
    the installation directory and type in ./replicator
 
 2. When the program is first started it will look for a configuration file. If one is not found it will auto-generate a new one with default settings.
-   You will need to edit the default config (JSON) file to suit your particular requirements (source and tartget directories and files)
+   You will need to edit the default config (JSON) file to suit your particular requirements (source and tartget directories and files).
+   The target file name is optional. If ommited the program will default to using the source file name.
 
 3. Once that is done you are free to restart the program which will then display your current configuration. If there are any errors at any point
 the program will immediately abort.

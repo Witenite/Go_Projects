@@ -92,6 +92,7 @@ func getConfig() {
 		config.TgtAddress = "192.168.1.126"
 		config.TgtPort = 22
 		config.TgtUser = "graham"
+		config.EventPeriod = 10
 
 		file, err := json.MarshalIndent(config, "", " ")
 		if err != nil {
