@@ -3,6 +3,8 @@ title: "Auto file updater"
 ---
 # Auto File Replicator
 #### by Graham Ward
+#### Programming language: Go version 1.13.8
+#### Compiled/run on Ubuntu 20.04 Linux 64 Bit
 #### Version 1.0.0
 
 
@@ -12,6 +14,8 @@ The purpose of this program is to monitor a specified local file for any changes
 Multiple instances of the program may be run concurrently in order to monitor and update different files. You'll have to create different directories for each copy of the program to accomodate the configurations (the IP address and port obviously remain the same for each config file, without incurring any SSH conflicts). Note I could have added some additional facility to monitor an entire directory (recursively) but for my requirement this wasn't necessary. I also felt that for larger projects it may be prudent to not be copying all the files that are not changing, and instead focus on only replicating the files that do change.
 
 This program was written to help me make software development on the Raspberry Pi simpler. IE although I do regularly cross compile code, there are times when what I am developing simply will not cross compile and has to be compiled natively on the Raspberry Pi itself. For this reason I developed this application that will monitor my source file as I write code, and as soon as I save it, automatically copy it over (using SFTP over an SSH connection with full authentication/encryption). I can then turn to the Raspberry Pi and compile the code just copied over to it. The simple yet tedius task of manually copying and pasting the file over a mapped network drive (or frequent use of an application like Filezilla) is thus mitigated.
+
+The program should have no problem replicating files of any kind across a network. It's use is not limited to text files.
 
 The code is written in Golang and serves as a working example of how to get SSH communications up and running, along with SFTP, using Go. It utilizes a watcher that relies on an OS API to monitor for any file changes that may occur. This minimizes program overhead.
 the code is tested/verified to compile and run in Ubuntu Linux. It should compile and run in Windows too, however I have not verified this yet.
@@ -30,7 +34,7 @@ Follow the instructions below (or see the resource link for more information) to
 
       **ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"**
 
-   3. Confirm keys now exist (should see id_rsa private and id_rsa.pub public key files):
+   3. Confirm keys now exist (should see **id_rsa** private and **id_rsa.pub** public key files):
    
       **ls ~/.ssh/id_***
 
@@ -39,7 +43,7 @@ Follow the instructions below (or see the resource link for more information) to
       **ssh-copy-id remote_username@server_ip_address**
 
 ## Operation
-1. The application is run from the command line. Either compile from source or use the ready made (Linux) executable (replicator). To execute simply go to the installation directory and type in:
+1. The application is run from the command line. Either compile from source or use the ready made (Linux 64Bit) executable (replicator). To execute simply go to the installation directory and type in:
    
    **./replicator**
 
