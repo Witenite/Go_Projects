@@ -1,26 +1,11 @@
 // Auto file updater by Graham Ward
 //
 // Graham Ward
-// Version 0.1.0
+// Version 1.1.0
 //
-// This program includes code for secure SSH communication between local client and remote server with authentication keys
-// Follow the instructions below to manually generate and deploy the required keys
-//
-// Resources:
-// https://linuxize.com/post/how-to-set-up-ssh-keys-on-ubuntu-20-04/
-// https://serverfault.com/questions/309171/possible-to-change-email-address-in-keypair
-// https://skarlso.github.io/2019/02/17/go-ssh-with-host-key-verification/
-//
-// 1. Follow instructions found at resource web page on creation of id_rsa private and public keys
-//    Note: email address is simply a comment line that takes no action.
-//          I set no password when prompted.
-//    ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"
-//
-// 2. Confirm keys now exist (should see id_rsa private and id_rsa.pub public key files):
-//    ls ~/.ssh/id_*
-//
-// 3. Copy keys over from local host to remote server or Raspberry Pi etc.:
-//    ssh-copy-id remote_username@server_ip_address
+// This application will monitor and automatically replicate a specified local file on a remote computer.
+// SSH with authentication keys is used for secure communications between local host and remote computer/server/Raspberry Pi/whatever
+// Refer to readme (Markdown) file for more details, or visit https://github.com/Witenite/Go_Projects/tree/master/File_Replicator
 
 package main
 
@@ -33,7 +18,7 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/go-fsnotify/fsnotify" // Library used to detect file changes. Download files manually and extract in github repository
+	"github.com/fsnotify/fsnotify" // Library used to detect file changes. Download files manually and extract in github repository
 	"github.com/pkg/sftp"
 
 	"github.com/maruel/interrupt" // Package ensures graceful exit and proper shutdown of deferred code on CTRL+C Exit
@@ -88,7 +73,7 @@ func getConfig() {
 		config.SrcUser = "/home/graham"
 		config.SrcFilePath = "/home/graham/"
 		config.SrcFileName = "myTestFile.txt"
-		config.TgtFilePath = "home/graham/Documents/"
+		config.TgtFilePath = "/home/graham/Documents/"
 		config.TgtAddress = "192.168.1.126"
 		config.TgtPort = 22
 		config.TgtUser = "graham"
@@ -111,7 +96,10 @@ func getConfig() {
 	if err != nil {
 		log.Fatal("ERROR: Failed to load configuration file (" + configFile + ").\nTry deleting corrupt file and restart program to create a new default file.")
 	}
-
+	//fileJSON, _ := strconv.Unquote(string(file))
+	if err != nil {
+		log.Fatal("ERROR: JSON Transformation failed to remove quote-marks")
+	}
 	err = json.Unmarshal([]byte(file), &config)
 	if err != nil {
 		log.Fatal("ERROR: Failed to load parameters from " + configFile + " file. \nConfirm JSON parameters are not corrupt. \nTry deleting corrupt file and restart program to create a new default file.")
@@ -200,7 +188,9 @@ func main() {
 					if event.Op&fsnotify.Write != fsnotify.Write {
 						log.Fatal("ERROR: Source file appears to have been deleted or no longer accessible: ", event.Name)
 					} else if duration > config.EventPeriod {
+
 						eventCounter++ // This is a valid update event. Increment tally of update events
+						fmt.Printf("Update %v...", eventCounter)
 
 						dstFile, err := client.Create(config.TgtFilePath + config.TgtFileName)
 						if err != nil {
@@ -222,7 +212,7 @@ func main() {
 							fmt.Println("ERROR: Failed to update file!")
 							log.Fatal(err)
 						}
-						fmt.Printf("%v Updates thus far. %d bytes copied\n", eventCounter, bytes)
+						fmt.Printf("complete. %d bytes copied\n", bytes)
 
 						dstFile.Close() // Close source and destination files until next event
 						srcFile.Close()
