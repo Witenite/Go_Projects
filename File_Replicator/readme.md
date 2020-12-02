@@ -85,9 +85,11 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
 
 ## Operation
 
-1. The application is run from the command line. Either compile from source or use the ready made (Linux 64Bit) executable (replicator). To execute simply go to the installation directory and type in:
+1. The application is run from the command line. Either compile from source or use the ready made (Linux 64Bit) executable (replicator) or Win10_Replicator.exe if you're a windows user. To execute simply go to the installation directory and type in:
    
-   <span style="color:green">**./replicator**</span>
+    Linux:` ` **./replicator**
+
+    Windows 10:` `**Win10_Replicator**
 
 2. When the program is first started it will look for a configuration file. If one is not found it will auto-generate a new one with default settings.
    You will need to edit the default config (JSON) file to suit your particular requirements (source and tartget directories and files).
