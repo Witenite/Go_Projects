@@ -65,12 +65,14 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
     
     <span style="color:green">**scp /users/gward/.ssh/id_rsa.pub graham@192.168.1.126:/home/user-name/.ssh**</span>
 
-5. On the remote machine check the keys that currently exist in the SSH authrorized_keys by using this command:
+5. On the remote (assumed to be linux or Raspberry Pi) machine check the keys that currently exist in the SSH authrorized_keys by using this command:
 6. 
     <span style="color:green">**more ~/.ssh/authorized_keys**</span>
 
 7. Add the new keys using these commands (Use the previous command every time to confirm addition of keys)
-    Note you may need to adjust source path to suit here.
+    Note: 1. You may need to adjust source path to suit here.
+          2. A Windows based target or remote system is beyond the scope of these instructions
+
 
     <span style="color:green">**cat ~/.ssh/id_rsa >> ~/.ssh/authorized_keys**</span>
     
