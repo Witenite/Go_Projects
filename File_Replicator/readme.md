@@ -28,22 +28,22 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
 #### Linux
 1. Verify whether or not the keys exist already. You should see **id_rsa** private and **id_rsa.pub** public key files listed when you execute:
    
-      <span style="color:green">**ls ~/.ssh/id_***</span>
+      **ls ~/.ssh/id_***
 
 2. If the keys do not exist, create SSH **id_rsa** private and public keys.
          Note: email address is simply a comment line entered into the generated key file and has no action or effect.
                Refer to resource below for more information.
                I set no password when prompted, however you can, should you deem it necessary.
 
-      <span style="color:green">**ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"**</span>
+      **ssh-keygen -t rsa -b 4096 -C "your_email@domain.com"**
 
 3. Confirm keys now exist (should see **id_rsa** private and **id_rsa.pub** public key files):
    
-      <span style="color:green">**ls ~/.ssh/id_***</span>
+      **ls ~/.ssh/id_***
 
 4. Copy keys over from local host to remote server or Raspberry Pi etc.:
    
-      <span style="color:green">**ssh-copy-id remote_username@server_ip_address**</span>
+      **ssh-copy-id remote_username@server_ip_address**
 
 
 #### Windows
@@ -59,23 +59,23 @@ Note: These instructions are for a local Windows system, and remote Linux system
     When the keys have been successfully generated, a key fingerprint is displayed as well as a "randomart" image
     Note you may be asked if you wish to overwrite existing keys. This scenario falls outside the scope of these instructions.
     
-    <span style="color:green">**ssh-keygen**</span>
+    **ssh-keygen**
 
 4. Copy the SSH keys over using the following commands (replace the IP address and user-name as required). Once copied, confirm the two files exist on remote system too.
 
-    <span style="color:green">**scp /users/gward/.ssh/id_rsa graham@192.168.1.126:/home/user-name/.ssh**</span>
+    **scp /users/gward/.ssh/id_rsa graham@192.168.1.126:/home/user-name/.ssh**
     
-    <span style="color:green">**scp /users/gward/.ssh/id_rsa.pub graham@192.168.1.126:/home/user-name/.ssh**</span>
+    **scp /users/gward/.ssh/id_rsa.pub graham@192.168.1.126:/home/user-name/.ssh**
 
 5. On the remote machine (assumed to be linux PC/server/Raspberry Pi) check the keys that currently exist in the SSH authrorized_keys by using this command:
 
-    <span style="color:green">**more ~/.ssh/authorized_keys**</span>
+    **more ~/.ssh/authorized_keys**
 
 6. Add the new keys using these commands (Use the previous command every time to confirm addition of keys)
     
-    <span style="color:green">**cat ~/.ssh/id_rsa >> ~/.ssh/authorized_keys**</span>
+    **cat ~/.ssh/id_rsa >> ~/.ssh/authorized_keys**
     
-    <span style="color:green">**cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys**</span>
+    **cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys**
 
 ## Operation
 
