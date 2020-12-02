@@ -1,6 +1,6 @@
-// Auto file updater by Graham Ward
+// Auto file updater
 //
-// Graham Ward
+// Author: Graham Ward
 // Version 1.1.0
 //
 // This application will monitor and automatically replicate a specified local file on a remote computer.
