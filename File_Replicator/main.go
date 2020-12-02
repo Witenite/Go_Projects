@@ -18,13 +18,13 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/fsnotify/fsnotify" // Library used to detect file changes. Download files manually and extract in github repository
+	"github.com/fsnotify/fsnotify" // Library used to establish watcher event trigger (monitor source file)
 	"github.com/pkg/sftp"
 
 	"github.com/maruel/interrupt" // Package ensures graceful exit and proper shutdown of deferred code on CTRL+C Exit
 
 	"golang.org/x/crypto/ssh"
-	kh "golang.org/x/crypto/ssh/knownhosts"
+	libSSH "golang.org/x/crypto/ssh/knownhosts"
 
 	"encoding/json"
 )
@@ -133,7 +133,7 @@ func main() {
 		log.Fatalf("unable to parse private key: %v", err)
 	}
 
-	hostKeyCallback, err := kh.New(config.SrcUser + "/.ssh/known_hosts")
+	hostKeyCallback, err := libSSH.New(config.SrcUser + "/.ssh/known_hosts")
 	if err != nil {
 		log.Fatal("could not create hostkeycallback function: ", err)
 	}
