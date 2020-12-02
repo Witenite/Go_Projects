@@ -48,6 +48,8 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
 
 #### Windows
 
+Note: These instructions are for a local Windows system, and remote Linux system. A Windows based target or remote system is beyond the scope of these instructions, though the program will work as expected with both a local and remote Windows based system.
+
 1. Confirm OpenSSH Client is installed under settings -> Application -> Manage optional applications
 
 2. Open CMD (run as adminisitrator by searching for **cmd** in start menu, then right clicking for option)
@@ -59,26 +61,18 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
     
     <span style="color:green">**ssh-keygen**</span>
 
-4. Copy the SSH keys over using the following commands (replace the IP address and user-name as required)
+4. Copy the SSH keys over using the following commands (replace the IP address and user-name as required). Once copied, confirm the two files exist on remote system too.
 
     <span style="color:green">**scp /users/gward/.ssh/id_rsa graham@192.168.1.126:/home/user-name/.ssh**</span>
     
     <span style="color:green">**scp /users/gward/.ssh/id_rsa.pub graham@192.168.1.126:/home/user-name/.ssh**</span>
 
-5. On the remote (assumed to be linux or Raspberry Pi) machine check the keys that currently exist in the SSH authrorized_keys by using this command:
+5. On the remote machine (assumed to be linux PC/server/Raspberry Pi) check the keys that currently exist in the SSH authrorized_keys by using this command:
 
     <span style="color:green">**more ~/.ssh/authorized_keys**</span>
 
 6. Add the new keys using these commands (Use the previous command every time to confirm addition of keys)
     
-
-    Note:
-
-    1. You may need to adjust source path to suit here.
-   
-    2. A Windows based target or remote system is beyond the scope of these instructions
-
-
     <span style="color:green">**cat ~/.ssh/id_rsa >> ~/.ssh/authorized_keys**</span>
     
     <span style="color:green">**cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys**</span>
@@ -92,7 +86,7 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
     Windows 10: &nbsp; **Win10_Replicator**
 
 2. When the program is first started it will look for a configuration file. If one is not found it will auto-generate a new one with default settings.
-   You will need to edit the default config (JSON) file to suit your particular requirements (source and tartget directories and files).
+   You will need to edit the default config (JSON) file to suit your particular requirements (source and target directories and files).
    The target file name is optional. If ommited the program will default to using the source file name.
 
 3. Once that is done you are free to restart the program which will then display your current configuration. If there are any errors at any point the program will immediately abort.
