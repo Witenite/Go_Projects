@@ -73,6 +73,7 @@ Finally, before proceeding, ensure that you have SSH connectivity enabled on bot
     Note you may need to adjust source path to suit here.
 
     <span style="color:green">**cat ~/.ssh/id_rsa >> ~/.ssh/authorized_keys**</span>
+    
     <span style="color:green">**cat ~/.ssh/id_rsa.pub >> ~/.ssh/authorized_keys**</span>
 
 ## Operation
