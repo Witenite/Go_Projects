@@ -5,7 +5,7 @@
 //
 // This application will monitor and automatically replicate a specified local file on a remote computer.
 // SSH with authentication keys is used for secure communications between local host and remote computer/server/Raspberry Pi/whatever
-// Refer to readme (Markdown) file for more details, or visit https://github.com/Witenite/Go_Projects/tree/master/File_Replicator
+// Refer to readme (Markdown) file for more details, or visit https://github.com/GWevroy/Go_Projects/blob/master/File_Replicator/main.go
 
 package main
 
